@@ -1,0 +1,15 @@
+# Dades i sessions d'Odoo
+data/
+sessions/
+*.log
+
+# Dades de PostgreSQL i volums
+postgres-data/
+odoo-data/
+
+# Fitxers temporals de Python
+__pycache__/
+*.py[cod]
+
+# Configuració local sensible
+.env

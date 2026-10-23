@@ -1,0 +1,35 @@
+services:
+  odooAntuan:
+    container_name: odooAntuan
+    image: odoo:19.0
+    depends_on:
+      - dbAntuan
+    ports:
+      - "8070:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      - HOST=dbAntuan
+      - USER=odoo
+      - PASSWORD=odoo
+    #command: ["--dev=all", "-u", "school", "-d", "proves"]
+    #fmyf-6twm-fibx ESTO ES LA CLAVE DE ADMIN
+    tty: true
+
+  dbAntuan:
+    container_name: postgresqlAntuan
+    image: postgres:15
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
